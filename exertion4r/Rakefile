@@ -1,0 +1,24 @@
+require 'rake'
+require 'rake/testtask'
+
+task :default => [:test_units]
+
+desc "Run basic tests"
+Rake::TestTask.new("test_units") { |t|
+  t.pattern = 'test/*_test.rb'
+  t.verbose = true
+  t.warning = true
+}
+
+
+task :build_gem do
+  system("gem build exertion4r.gemspec")
+end
+
+task :install_gem do
+  system("gem install *.gem")
+end
+
+task :deploy_gem do
+  system("scp *.gem codehaus03:/home/projects/exertion4r/snapshots.dist/distributions/")
+end
