@@ -20,6 +20,12 @@ class PolarDayDescription
     end
   end
   
+  def date
+    section = @polar_file.find_section_by_name('DayInfo')
+    date = section.lines[1].fields[0].text
+    Time.local(date[0..3], date[4..5], date[6..7], 0, 0, 0, 0)
+  end
+  
   #Access to this should be avoided
   def polar_file
     @polar_file

@@ -1,3 +1,5 @@
+require 'exertion4r/modules/polar/polar_exercise_datapoint'
+
 class PolarExerciseInfo
   
   def initialize(section)
@@ -78,6 +80,35 @@ class PolarExerciseInfo
 
   def smode_air_pressure
     smode_char(8) != '0'
+  end
+  
+  def datapoints
+    section = @polar_file.find_section_by_name("HRData")
+    points = []
+    section.lines.each { |line|
+      elements = []
+      line.fields.each { |field|
+        elements << field.text
+      }
+      points << PolarExerciseDatapoint.new(elements)
+    }
+    points
+  end
+  
+  def hr_element_index()
+    0
+  end
+  
+  def speed_element_index()
+    hr_element_index + 1
+  end
+  
+  def cadence_element_index()
+    hr_element_index + (smode_speed ? 1 : 0) + 1
+  end
+  
+  def altitude_element_index()
+    hr_element_index + (smode_speed ? 1 : 0) + (smode_cadence ? 1 : 0) + 1
   end
 
 private

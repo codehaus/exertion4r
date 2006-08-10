@@ -16,17 +16,18 @@ class PolarFile
         line.strip!
         
         
-        if line == ''
-          #puts "blanky #{section_name}"
+        if line[0..0] == '['
+          #Close off old section
           if section_name
+            #Don't want trailing blank lines for the section.
+            #puts section_lines.inspect
+            #puts section_lines.last
+            section_lines.pop while section_lines.last and section_lines.last.line == ''
             sections << PolarSection.new(self, section_name, section_lines)
             section_name = nil
             section_lines = []
           end
-          next
-        end
-        
-        if line[0..0] == '['
+
           section_name = line[1..-2]
           section_lines = []
           next
@@ -35,6 +36,10 @@ class PolarFile
         section_lines << PolarLine.new(line)
         
       }
+      
+      #Don't want trailing blank lines for the section.
+      section_lines.pop while section_lines.last.line == ''
+      sections << PolarSection.new(self, section_name, section_lines)
     }
     @sections = sections
   end
@@ -85,6 +90,10 @@ end
 class PolarLine
   def initialize(line)
     @line = line
+  end
+  
+  def to_s
+    "PolarLine['#{line}']"
   end
   
   def line()
