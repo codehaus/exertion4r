@@ -57,10 +57,13 @@ class PolarTest < Test::Unit::TestCase
     assert_not_nil day_desc
     
     assert_equal 2, day_desc.exercise_infos.length
-    
+  
+    assert_equal Time.local(2006, 7, 30, 0, 0, 0, 0), day_desc.date   
+      
     ex_info_1 = day_desc.exercise_infos[0]
     ex_info_2 = day_desc.exercise_infos[1]
     
+
     assert_equal "06:18:39.0", ex_info_1.start_time
     assert_equal "09:35:47.0", ex_info_2.start_time
     
@@ -75,12 +78,36 @@ class PolarTest < Test::Unit::TestCase
     assert_equal 193, ex_info_1.max_hr
     assert_equal 56, ex_info_1.rest_hr
     assert_equal 104, ex_info_1.weight
-
+    
+    #Check datapoints are being parsed correctly
+    assert_equal 0, ex_info_1.hr_element_index
+    assert_equal 1, ex_info_1.speed_element_index
+    assert_equal 2, ex_info_1.cadence_element_index
+    assert_equal 3, ex_info_1.altitude_element_index
+    
+    assert_equal 2321, ex_info_1.datapoints.length
     
     
     
+    #Check datapoints are being parsed correctly
+    assert_equal 0, ex_info_2.hr_element_index
+    assert_equal 1, ex_info_2.speed_element_index
+    assert_equal 2, ex_info_2.altitude_element_index
+    
+    assert_equal 406, ex_info_2.datapoints.length
   end
+
+  def test_parse_20060713
+    exertion = Exertion4r.new('Polar', "./test/20060713.pdd")
+    exertion.open
+    day_desc = exertion.driver.polar_day_description
+    assert_not_nil day_desc
     
+    assert_equal 1, day_desc.exercise_infos.length
+  
+    assert_equal Time.local(2006, 7, 13, 0, 0, 0, 0), day_desc.date
+    
+  end    
 
 end 
 
