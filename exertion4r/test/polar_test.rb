@@ -93,6 +93,7 @@ class PolarTest < Test::Unit::TestCase
     assert_equal 0, ex_info_2.hr_element_index
     assert_equal 1, ex_info_2.speed_element_index
     assert_equal 2, ex_info_2.altitude_element_index
+    assert_equal(-1, ex_info_2.cadence_element_index)
     
     assert_equal 406, ex_info_2.datapoints.length
   end
@@ -107,6 +108,30 @@ class PolarTest < Test::Unit::TestCase
   
     assert_equal Time.local(2006, 7, 13, 0, 0, 0, 0), day_desc.date
     
+  end    
+
+  def test_parse_20051231
+    exertion = Exertion4r.new('Polar', "./test/20051231.pdd")
+    exertion.open
+    day_desc = exertion.driver.polar_day_description
+    assert_not_nil day_desc
+    
+    assert_equal 1, day_desc.exercise_infos.length
+  
+    assert_equal Time.local(2005, 12, 31, 0, 0, 0, 0), day_desc.date
+    
+    ex_info_0 = day_desc.exercise_infos[0]
+    assert_not_nil ex_info_0
+    assert ex_info_0.smode_power
+    
+    #Check datapoints are being parsed correctly
+    assert_equal 0, ex_info_0.hr_element_index
+    assert_equal 1, ex_info_0.speed_element_index
+    assert_equal 2, ex_info_0.cadence_element_index
+    assert_equal 3, ex_info_0.altitude_element_index
+    assert_equal 4, ex_info_0.power_element_index
+    assert_equal 5, ex_info_0.power_lrbpi_element_index
+
   end    
 
 end 

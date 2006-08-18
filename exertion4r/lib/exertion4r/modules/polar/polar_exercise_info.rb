@@ -96,19 +96,32 @@ class PolarExerciseInfo
   end
   
   def hr_element_index()
-    0
+    return 0
   end
   
   def speed_element_index()
+    return -1 unless smode_speed
     hr_element_index + 1
   end
   
   def cadence_element_index()
+    return -1 unless smode_cadence
     hr_element_index + (smode_speed ? 1 : 0) + 1
   end
   
   def altitude_element_index()
+    return -1 unless smode_altitude
     hr_element_index + (smode_speed ? 1 : 0) + (smode_cadence ? 1 : 0) + 1
+  end
+
+  def power_element_index()
+    return -1 unless smode_power
+    hr_element_index + (smode_speed ? 1 : 0) + (smode_cadence ? 1 : 0) + (smode_altitude ? 1 : 0) + 1
+  end
+
+  def power_lrbpi_element_index()
+    return -1 unless smode_power_left_right_balance and smode_power_pedalling_index
+    hr_element_index + (smode_speed ? 1 : 0) + (smode_cadence ? 1 : 0) + (smode_altitude ? 1 : 0) + (smode_power ? 1 : 0) + 1
   end
 
 private
