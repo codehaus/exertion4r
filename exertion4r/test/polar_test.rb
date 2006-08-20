@@ -144,7 +144,9 @@ class PolarTest < Test::Unit::TestCase
     day_desc = exertion.driver.polar_day_description
     assert_not_nil day_desc
     
-    assert_equal 1, day_desc.exercise_infos.length
+    assert_equal 3, day_desc.exercise_infos.length
+    assert_equal [], day_desc.description
+
   
   end
 

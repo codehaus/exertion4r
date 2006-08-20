@@ -37,6 +37,7 @@ class PolarDayDescription
   
   def description
     section = @polar_file.find_section_by_name('DayInfo')
+    []
   end
   
 end
