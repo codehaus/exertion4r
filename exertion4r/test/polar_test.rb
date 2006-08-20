@@ -56,6 +56,7 @@ class PolarTest < Test::Unit::TestCase
     day_desc = exertion.driver.polar_day_description
     assert_not_nil day_desc
     
+    
     assert_equal 2, day_desc.exercise_infos.length
   
     assert_equal Time.local(2006, 7, 30, 0, 0, 0, 0), day_desc.date   
@@ -63,6 +64,9 @@ class PolarTest < Test::Unit::TestCase
     ex_info_1 = day_desc.exercise_infos[0]
     ex_info_2 = day_desc.exercise_infos[1]
     
+
+    assert_equal ["Coomera Half Iron course", "2x 45km laps"], ex_info_1.description
+    assert_equal ["Coomera BRICK", "easy run off the bike"], ex_info_2.description
 
     assert_equal "06:18:39.0", ex_info_1.start_time
     assert_equal "09:35:47.0", ex_info_2.start_time

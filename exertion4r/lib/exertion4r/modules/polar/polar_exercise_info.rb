@@ -3,8 +3,16 @@ require 'exertion4r/modules/polar/polar_exercise_datapoint'
 class PolarExerciseInfo
   
   def initialize(section)
+    @pdd_section = section
     @polar_file = PolarFile.new(File.dirname(section.polar_file.filename) + "/" + section.lines.last.line)
   end
+  
+  def description
+    @pdd_section.lines[20..-2].collect { |polar_line|
+      polar_line.line
+    }
+  end
+    
   
   def version
     params_section().find_property_value_by_name("Version")
