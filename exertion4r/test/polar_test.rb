@@ -70,7 +70,10 @@ class PolarTest < Test::Unit::TestCase
     assert_equal ["Coomera BRICK", "easy run off the bike"], ex_info_2.description
 
     assert_equal "06:18:39.0", ex_info_1.start_time
+    assert_equal Time.local(2006, 7, 30, 6, 18, 39, 0), ex_info_1.start_date_time
+    
     assert_equal "09:35:47.0", ex_info_2.start_time
+    assert_equal Time.local(2006, 7, 30, 9, 35, 47, 0), ex_info_2.start_date_time
     
     assert_equal true, ex_info_1.smode_speed
     assert_equal true, ex_info_1.smode_cadence

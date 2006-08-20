@@ -12,6 +12,15 @@ class PolarExerciseInfo
       polar_line.line
     }
   end
+  
+  #Computed from start_time and date
+  def start_date_time
+    #Date=20060730
+    #StartTime=09:35:47.0
+    Time.local(date[0..3], date[4..5], date[6..7], start_time[0..1], start_time[3..4], start_time[6..7], start_time[9..9] * 100)
+  end
+
+  
     
   
   def version
