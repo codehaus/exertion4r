@@ -7,7 +7,6 @@ class PolarDayDescription
     @polar_file = polar_file
     @exercise_infos = []
     
-    
     ei_index = 1
     while true
       section = @polar_file.find_section_by_name("ExerciseInfo#{ei_index}")
