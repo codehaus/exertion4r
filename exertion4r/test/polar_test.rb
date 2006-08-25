@@ -35,7 +35,7 @@ class PolarTest < Test::Unit::TestCase
     assert_equal 23, exe1.lines.length
     assert_equal "Coomera Half Iron course", exe1.lines[20].line
     assert_equal "2x 45km laps",             exe1.lines[21].line
-    assert_equal "06073002.hrm",             exe1.lines[22].line
+    assert_equal "C:\\clowncheese\\06073002.hrm", exe1.lines[22].line
 
     exe2 = polar_file.sections[2]
     assert_equal "ExerciseInfo2", exe2.name

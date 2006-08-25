@@ -4,7 +4,10 @@ class PolarExerciseInfo
   
   def initialize(section)
     @pdd_section = section
-    @polar_file = PolarFile.new(File.dirname(section.polar_file.filename) + "/" + section.lines.last.line)
+    hrm_file = section.lines.last.line
+    hrm_file = hrm_file.gsub('\\', '/')
+    hrm_file = File.basename(hrm_file)
+    @polar_file = PolarFile.new(File.dirname(section.polar_file.filename) + "/" + hrm_file)
   end
   
   def description
