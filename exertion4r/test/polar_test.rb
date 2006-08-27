@@ -71,9 +71,12 @@ class PolarTest < Test::Unit::TestCase
 
     assert_equal "06:18:39.0", ex_info_1.start_time
     assert_equal Time.local(2006, 7, 30, 6, 18, 39, 0), ex_info_1.start_date_time
+    assert_equal 5, ex_info_1.interval
     
     assert_equal "09:35:47.0", ex_info_2.start_time
     assert_equal Time.local(2006, 7, 30, 9, 35, 47, 0), ex_info_2.start_date_time
+    assert_equal 5, ex_info_2.interval
+    
     
     assert_equal true, ex_info_1.smode_speed
     assert_equal true, ex_info_1.smode_cadence
@@ -131,6 +134,7 @@ class PolarTest < Test::Unit::TestCase
     ex_info_0 = day_desc.exercise_infos[0]
     assert_not_nil ex_info_0
     assert ex_info_0.smode_power
+    assert_equal 15, ex_info_0.interval
     
     #Check datapoints are being parsed correctly
     assert_equal 0, ex_info_0.hr_element_index

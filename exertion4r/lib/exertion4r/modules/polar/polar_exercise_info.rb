@@ -35,7 +35,7 @@ class PolarExerciseInfo
   end
 
   def interval
-    params_section().find_property_value_by_name("Interval")
+    params_section().find_property_value_by_name("Interval").to_i
   end
   
   def length
