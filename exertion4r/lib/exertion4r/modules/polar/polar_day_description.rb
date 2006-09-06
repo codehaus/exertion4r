@@ -7,16 +7,16 @@ class PolarDayDescription
     @polar_file = polar_file
     @exercise_infos = []
     
-    ei_index = 1
-    while true
+    ei_count = @polar_file.find_section_by_name("DayInfo").lines[1].fields[1].text.to_i
+    
+    1.upto(ei_count) { |ei_index|
       section = @polar_file.find_section_by_name("ExerciseInfo#{ei_index}")
       if section
         exercise_infos << PolarExerciseInfo.new(section)
       else 
         break
       end
-      ei_index = ei_index + 1
-    end
+    }
   end
   
   def date

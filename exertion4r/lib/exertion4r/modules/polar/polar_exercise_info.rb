@@ -11,9 +11,11 @@ class PolarExerciseInfo
   end
   
   def description
-    @pdd_section.lines[20..-2].collect { |polar_line|
-      polar_line.line
-    }
+    @pdd_section.lines[20].line
+  end
+  
+  def notes
+    @pdd_section.lines[21].line
   end
   
   #Computed from start_time and date
