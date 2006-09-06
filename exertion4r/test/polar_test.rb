@@ -147,7 +147,7 @@ class PolarTest < Test::Unit::TestCase
     assert_equal 3, ex_info_0.altitude_element_index
     assert_equal 4, ex_info_0.power_element_index
     assert_equal 5, ex_info_0.power_lrbpi_element_index
-  end    
+  end
   
   def test_parse_200600804
     exertion = Exertion4r.new('Polar', "./test/20060804.pdd")
@@ -156,9 +156,19 @@ class PolarTest < Test::Unit::TestCase
     assert_not_nil day_desc
     
     assert_equal 3, day_desc.exercise_infos.length
-    assert_equal [], day_desc.description
+    assert_equal "", day_desc.description
 
   
+  end
+  
+  def test_parse_200600904
+    exertion = Exertion4r.new('Polar', "./test/20060904.pdd")
+    exertion.open
+    day_desc = exertion.driver.polar_day_description
+    assert_not_nil day_desc
+    
+    assert_equal 1, day_desc.exercise_infos.length
+    assert_equal "", day_desc.description
   end
   
   def test_parse_test_user_ppd
