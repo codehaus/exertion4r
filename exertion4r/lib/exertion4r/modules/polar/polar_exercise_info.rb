@@ -39,7 +39,11 @@ class PolarExerciseInfo
   end
   
   def length
-    params_section().find_property_value_by_name("Length")
+    # length looks something like X:XX:XX.X
+    length = params_section().find_property_value_by_name("Length")
+    pieces = length.split(':')
+    
+    return pieces[0].to_i * 3600 + pieces[1].to_i * 60 + pieces[2].to_f
   end
   
   def date

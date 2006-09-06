@@ -135,6 +135,7 @@ class PolarTest < Test::Unit::TestCase
     assert_not_nil ex_info_0
     assert ex_info_0.smode_power
     assert_equal 15, ex_info_0.interval
+    assert_equal 13238, ex_info_0.length
     
     #Check datapoints are being parsed correctly
     assert_equal 0, ex_info_0.hr_element_index
@@ -156,6 +157,19 @@ class PolarTest < Test::Unit::TestCase
 
   
   end
+  
+  def test_parse_test_user_ppd
+    exertion = Exertion4r.new('Polar', "./test/test_user.ppd")
+    exertion.open
+    
+    ppd = exertion.driver.polar_person_description
+    
+    assert_not_nil ppd
+    
+    assert_equal "Harry", ppd.first_name
+    assert_equal "Smith", ppd.last_name
+  end
+  
 
 end 
 

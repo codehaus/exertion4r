@@ -1,5 +1,6 @@
 require "exertion4r/modules/polar/polar_file"
 require "exertion4r/modules/polar/polar_day_description"
+require "exertion4r/modules/polar/polar_person_description"
 
 class Polar
   def url=(url)
@@ -8,8 +9,21 @@ class Polar
   
   def open()
     @polar_file = PolarFile.new(@url)
-    @polar_day_description = PolarDayDescription.new(@polar_file)
-    @polar_day_description
+    extension = @url[-4..-1]
+
+    if extension == '.pdd'
+      @pdd = PolarDayDescription.new(@polar_file)
+      return @pdd
+    end
+    
+    if extension == '.ppd'
+      @ppd = PolarPersonDescription.new(@polar_file)
+      return @ppd
+    end
+    
+    puts "Unable to process file #{@polar_file} with extension #{extension}"
+    
+    return nil
   end
   
   def close()
@@ -22,7 +36,11 @@ class Polar
   end
   
   def polar_day_description
-    @polar_day_description
+    @pdd
+  end
+  
+  def polar_person_description
+    @ppd
   end
   
 end
