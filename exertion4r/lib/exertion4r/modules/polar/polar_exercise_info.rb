@@ -22,6 +22,9 @@ class PolarExerciseInfo
     end
   end
   
+  def has_measurements?
+    @polar_file != nil
+  end
   
   def description
     line_index = main_line_count + 1

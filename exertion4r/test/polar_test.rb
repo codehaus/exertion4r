@@ -168,6 +168,7 @@ class PolarTest < Test::Unit::TestCase
     assert_not_nil day_desc
     
     assert_equal 1, day_desc.exercise_infos.length
+    assert_equal false, day_desc.exercise_infos[0].has_measurements?
     assert_equal "", day_desc.description
   end
   
